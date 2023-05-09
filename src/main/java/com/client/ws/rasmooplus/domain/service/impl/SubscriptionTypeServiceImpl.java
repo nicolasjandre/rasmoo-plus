@@ -2,14 +2,16 @@ package com.client.ws.rasmooplus.domain.service.impl;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.stereotype.Service;
 
+import com.client.ws.rasmooplus.domain.controller.SubscriptionTypeController;
 import com.client.ws.rasmooplus.domain.dto.SubscriptionTypeDto;
 import com.client.ws.rasmooplus.domain.exception.BadRequestException;
 import com.client.ws.rasmooplus.domain.exception.NotFoundException;
+import com.client.ws.rasmooplus.domain.mapper.SubscriptionTypeMapper;
 import com.client.ws.rasmooplus.domain.model.SubscriptionType;
 import com.client.ws.rasmooplus.domain.repository.SubscriptionTypeRepository;
 import com.client.ws.rasmooplus.domain.service.SubscriptionTypeService;
@@ -23,17 +25,10 @@ public class SubscriptionTypeServiceImpl implements SubscriptionTypeService {
     @Override
     public SubscriptionType create(SubscriptionTypeDto dto) {
         if (Objects.nonNull(dto.getId())) {
-            throw new BadRequestException("O id deve ser nulo.");
+            throw new BadRequestException("Não pode haver um id no body");
         }
 
-        return subscriptionTypeRepository.save(
-                SubscriptionType.builder()
-                        .id(dto.getId())
-                        .name(dto.getName())
-                        .accessMonths(dto.getAccessMonth())
-                        .price(dto.getPrice())
-                        .productKey(dto.getProductKey())
-                        .build());
+        return subscriptionTypeRepository.save(SubscriptionTypeMapper.fromDtoToEntity(dto));
     }
 
     @Override
@@ -49,26 +44,20 @@ public class SubscriptionTypeServiceImpl implements SubscriptionTypeService {
 
     @Override
     public SubscriptionType findById(Long id) {
-        Optional<SubscriptionType> optionalSubscriptionType = subscriptionTypeRepository.findById(id);
+        var optionalSubscriptionType = subscriptionTypeRepository.findById(id);
 
         if (optionalSubscriptionType.isEmpty()) {
-            throw new NotFoundException("SubscriptionType id = [" + id + "] não encontrado.");
+            throw new NotFoundException("SubscriptionType id=[" + id + "] não encontrado");
         }
 
-        return optionalSubscriptionType.get();
+        return optionalSubscriptionType.get().add(WebMvcLinkBuilder.linkTo(
+                WebMvcLinkBuilder.methodOn(SubscriptionTypeController.class).findById(id)).withSelfRel());
     }
 
     @Override
     public SubscriptionType update(Long id, SubscriptionTypeDto dto) {
         this.findById(id);
-
-        return subscriptionTypeRepository.save(
-                SubscriptionType.builder()
-                        .id(id)
-                        .name(dto.getName())
-                        .accessMonths(dto.getAccessMonth())
-                        .price(dto.getPrice())
-                        .productKey(dto.getProductKey())
-                        .build());
+        dto.setId(id);
+        return subscriptionTypeRepository.save(SubscriptionTypeMapper.fromDtoToEntity(dto));
     }
 }

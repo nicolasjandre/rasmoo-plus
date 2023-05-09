@@ -35,17 +35,17 @@ public class UserPaymentInfo implements Serializable {
     private String cardNumber;
 
     @Column(name = "card_expiration_month")
-    private int cardExpirationMonth;
+    private Integer cardExpirationMonth;
 
     @Column(name = "card_expiration_year")
-    private int cardExpirationYear;
+    private Integer cardExpirationYear;
 
     @Column(name = "card_security_code")
     private String cardSecurityCode;
 
     private BigDecimal price;
 
-    private int instalments;
+    private Integer instalments;
 
     @Column(name = "dt_payment")
     private LocalDate dtPayment;
