@@ -1,5 +1,6 @@
-package com.client.ws.rasmooplus.domain.models;
+package com.client.ws.rasmooplus.domain.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -22,15 +23,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "user_payment_info") 
-public class UserPaymentInfo {
-    
+@Table(name = "user_payment_info")
+public class UserPaymentInfo implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_payment_info_id")
-    private long id;
+    private Long id;
 
-    @Column(name = "card_number")
+    @Column(name = "card_number", unique = true)
     private String cardNumber;
 
     @Column(name = "card_expiration_month")
@@ -43,6 +44,8 @@ public class UserPaymentInfo {
     private String cardSecurityCode;
 
     private BigDecimal price;
+
+    private int instalments;
 
     @Column(name = "dt_payment")
     private LocalDate dtPayment;

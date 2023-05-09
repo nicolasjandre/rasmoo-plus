@@ -1,4 +1,4 @@
-package com.client.ws.rasmooplus.domain.models;
+package com.client.ws.rasmooplus.domain.model;
 
 import java.io.Serializable;
 
@@ -24,7 +24,7 @@ public class UserType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_type_id")
-    private long id;
+    private Long id;
 
     private String name;
 

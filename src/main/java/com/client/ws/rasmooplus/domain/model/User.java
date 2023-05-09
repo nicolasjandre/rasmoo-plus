@@ -1,4 +1,4 @@
-package com.client.ws.rasmooplus.domain.models;
+package com.client.ws.rasmooplus.domain.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -28,14 +28,17 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "users_id")
-    private long id;
+    private Long id;
 
     private String name;
 
+    @Column(unique = true)
     private String email;
 
+    @Column(unique = true)
     private String phone;
-
+    
+    @Column(unique = true)
     private String cpf;
 
     @Column(name = "dt_subscription")
@@ -45,7 +48,7 @@ public class User implements Serializable {
     private LocalDate dtExpiration;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "users_type_id")
+    @JoinColumn(name = "user_type_id")
     private UserType userType;
 
     @ManyToOne(fetch = FetchType.LAZY)
