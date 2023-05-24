@@ -1,0 +1,37 @@
+{"properties": [
+  {
+    "name": "webservices.raspay.v1.payment",
+    "type": "java.lang.String",
+    "description": "A description for 'webservices.raspay.v1.payment'"
+  },
+  {
+    "name": "webservices.raspay.v1.order",
+    "type": "java.lang.String",
+    "description": "A description for 'webservices.raspay.v1.order'"
+  },
+  {
+    "name": "webservices.raspay.v1.customer",
+    "type": "java.lang.String",
+    "description": "A description for 'webservices.raspay.v1.customer'"
+  },
+  {
+    "name": "webservices.raspay.host",
+    "type": "java.lang.String",
+    "description": "A description for 'webservices.raspay.host'"
+  },
+  {
+    "name": "auth.jwt.expiration",
+    "type": "java.lang.String",
+    "description": "A description for 'auth.jwt.expiration'"
+  },
+  {
+    "name": "auth.jwt.secret",
+    "type": "java.lang.String",
+    "description": "A description for 'auth.jwt.secret'"
+  },
+  {
+    "name": "webservices.rasplus.default.password",
+    "type": "java.lang.String",
+    "description": "A description for 'webservices.rasplus.default.password'"
+  }
+]}

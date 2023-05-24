@@ -1,4 +1,4 @@
-package com.client.ws.rasmooplus.domain.dto.error;
+package com.client.ws.rasmooplus.dto.error;
 
 import org.springframework.http.HttpStatus;
 

@@ -1,4 +1,4 @@
-package com.client.ws.rasmooplus.domain.dto;
+package com.client.ws.rasmooplus.dto;
 
 import java.time.LocalDate;
 

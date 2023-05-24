@@ -1,6 +1,6 @@
 package com.client.ws.rasmooplus.domain.model;
 
-import java.io.Serializable;
+import org.springframework.security.core.GrantedAuthority;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "user_type")
-public class UserType implements Serializable {
+public class UserType implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,4 +29,9 @@ public class UserType implements Serializable {
     private String name;
 
     private String description;
+
+    @Override
+    public String getAuthority() {
+        return name;
+    }
 }

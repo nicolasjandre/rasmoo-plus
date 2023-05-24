@@ -1,4 +1,4 @@
-package com.client.ws.rasmooplus.domain.controller;
+package com.client.ws.rasmooplus.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.client.ws.rasmooplus.domain.dto.UserDto;
 import com.client.ws.rasmooplus.domain.model.User;
 import com.client.ws.rasmooplus.domain.service.UserService;
+import com.client.ws.rasmooplus.dto.UserDto;
 
 import jakarta.validation.Valid;
 

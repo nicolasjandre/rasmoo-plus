@@ -1,4 +1,4 @@
-package com.client.ws.rasmooplus.domain.controller;
+package com.client.ws.rasmooplus.controller;
 
 import java.net.URI;
 import java.util.List;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.client.ws.rasmooplus.domain.dto.SubscriptionTypeDto;
 import com.client.ws.rasmooplus.domain.model.SubscriptionType;
 import com.client.ws.rasmooplus.domain.service.SubscriptionTypeService;
+import com.client.ws.rasmooplus.dto.SubscriptionTypeDto;
 
 import jakarta.validation.Valid;
 

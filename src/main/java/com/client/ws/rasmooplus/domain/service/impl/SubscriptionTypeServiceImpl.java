@@ -7,14 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.stereotype.Service;
 
-import com.client.ws.rasmooplus.domain.controller.SubscriptionTypeController;
-import com.client.ws.rasmooplus.domain.dto.SubscriptionTypeDto;
+import com.client.ws.rasmooplus.controller.SubscriptionTypeController;
 import com.client.ws.rasmooplus.domain.exception.BadRequestException;
 import com.client.ws.rasmooplus.domain.exception.NotFoundException;
 import com.client.ws.rasmooplus.domain.mapper.SubscriptionTypeMapper;
 import com.client.ws.rasmooplus.domain.model.SubscriptionType;
 import com.client.ws.rasmooplus.domain.repository.SubscriptionTypeRepository;
 import com.client.ws.rasmooplus.domain.service.SubscriptionTypeService;
+import com.client.ws.rasmooplus.dto.SubscriptionTypeDto;
 
 @Service
 public class SubscriptionTypeServiceImpl implements SubscriptionTypeService {

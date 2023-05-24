@@ -1,9 +1,9 @@
 package com.client.ws.rasmooplus.domain.mapper;
 
-import com.client.ws.rasmooplus.domain.dto.UserDto;
 import com.client.ws.rasmooplus.domain.model.SubscriptionType;
 import com.client.ws.rasmooplus.domain.model.User;
 import com.client.ws.rasmooplus.domain.model.UserType;
+import com.client.ws.rasmooplus.dto.UserDto;
 
 public class UserMapper {
 

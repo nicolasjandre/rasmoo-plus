@@ -1,4 +1,4 @@
-package com.client.ws.rasmooplus.domain.controller;
+package com.client.ws.rasmooplus.controller;
 
 import java.util.List;
 

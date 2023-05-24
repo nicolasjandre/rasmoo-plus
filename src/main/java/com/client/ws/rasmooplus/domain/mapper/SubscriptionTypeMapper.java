@@ -1,7 +1,7 @@
 package com.client.ws.rasmooplus.domain.mapper;
 
-import com.client.ws.rasmooplus.domain.dto.SubscriptionTypeDto;
 import com.client.ws.rasmooplus.domain.model.SubscriptionType;
+import com.client.ws.rasmooplus.dto.SubscriptionTypeDto;
 
 public class SubscriptionTypeMapper {
 

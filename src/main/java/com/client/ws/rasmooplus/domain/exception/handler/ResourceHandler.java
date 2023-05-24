@@ -10,9 +10,10 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.client.ws.rasmooplus.domain.dto.error.ErrorResponseDto;
 import com.client.ws.rasmooplus.domain.exception.BadRequestException;
+import com.client.ws.rasmooplus.domain.exception.BusinessException;
 import com.client.ws.rasmooplus.domain.exception.NotFoundException;
+import com.client.ws.rasmooplus.dto.error.ErrorResponseDto;
 
 @RestControllerAdvice
 public class ResourceHandler {
@@ -23,6 +24,15 @@ public class ResourceHandler {
                 .message(ex.getMessage())
                 .httpStatus(HttpStatus.NOT_FOUND)
                 .statusCode(HttpStatus.NOT_FOUND.value())
+                .build());
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<ErrorResponseDto> businessException(BusinessException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ErrorResponseDto.builder()
+                .message(ex.getMessage())
+                .httpStatus(HttpStatus.CONFLICT)
+                .statusCode(HttpStatus.CONFLICT.value())
                 .build());
     }
 
