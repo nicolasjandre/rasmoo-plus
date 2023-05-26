@@ -9,7 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-import com.client.ws.rasmooplus.domain.model.UserCredentials;
+import com.client.ws.rasmooplus.domain.model.jpa.UserCredentials;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import com.client.ws.rasmooplus.domain.model.UserCredentials;
+import com.client.ws.rasmooplus.domain.model.jpa.UserCredentials;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

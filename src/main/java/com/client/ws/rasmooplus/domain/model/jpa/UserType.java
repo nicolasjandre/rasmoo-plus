@@ -1,4 +1,4 @@
-package com.client.ws.rasmooplus.domain.model;
+package com.client.ws.rasmooplus.domain.model.jpa;
 
 import org.springframework.security.core.GrantedAuthority;
 

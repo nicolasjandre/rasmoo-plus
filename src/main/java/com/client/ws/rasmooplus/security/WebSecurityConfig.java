@@ -46,6 +46,7 @@ public class WebSecurityConfig {
                         .requestMatchers(AUTH_SWAGGER_LIST).permitAll()
                         .requestMatchers(HttpMethod.GET, "/subscription-type").permitAll()
                         .requestMatchers(HttpMethod.POST, "/user").permitAll()
+                        .requestMatchers("/user-recovery-code/*").permitAll()
                         .requestMatchers(HttpMethod.POST, "/payment/process").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth").permitAll()
                         .requestMatchers("/auth/recovery-code/*").permitAll()

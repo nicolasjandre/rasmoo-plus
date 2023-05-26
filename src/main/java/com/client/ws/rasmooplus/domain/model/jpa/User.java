@@ -1,4 +1,4 @@
-package com.client.ws.rasmooplus.domain.model;
+package com.client.ws.rasmooplus.domain.model.jpa;
 
 import java.io.Serializable;
 import java.time.LocalDate;

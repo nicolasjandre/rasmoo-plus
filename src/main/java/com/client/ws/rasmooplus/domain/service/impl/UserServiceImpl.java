@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 import com.client.ws.rasmooplus.domain.exception.BadRequestException;
 import com.client.ws.rasmooplus.domain.exception.NotFoundException;
 import com.client.ws.rasmooplus.domain.mapper.UserMapper;
-import com.client.ws.rasmooplus.domain.model.SubscriptionType;
-import com.client.ws.rasmooplus.domain.model.User;
-import com.client.ws.rasmooplus.domain.model.UserType;
-import com.client.ws.rasmooplus.domain.repository.SubscriptionTypeRepository;
-import com.client.ws.rasmooplus.domain.repository.UserRepository;
-import com.client.ws.rasmooplus.domain.repository.UserTypeRepository;
+import com.client.ws.rasmooplus.domain.model.jpa.SubscriptionType;
+import com.client.ws.rasmooplus.domain.model.jpa.User;
+import com.client.ws.rasmooplus.domain.model.jpa.UserType;
+import com.client.ws.rasmooplus.domain.repository.jpa.SubscriptionTypeRepository;
+import com.client.ws.rasmooplus.domain.repository.jpa.UserRepository;
+import com.client.ws.rasmooplus.domain.repository.jpa.UserTypeRepository;
 import com.client.ws.rasmooplus.domain.service.UserService;
 import com.client.ws.rasmooplus.dto.UserDto;
 

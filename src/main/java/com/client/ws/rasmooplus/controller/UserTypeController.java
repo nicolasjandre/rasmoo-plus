@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.client.ws.rasmooplus.domain.model.UserType;
+import com.client.ws.rasmooplus.domain.model.jpa.UserType;
 import com.client.ws.rasmooplus.domain.service.UserTypeService;
 
 @RestController

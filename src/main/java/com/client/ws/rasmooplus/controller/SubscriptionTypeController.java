@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.client.ws.rasmooplus.domain.model.SubscriptionType;
+import com.client.ws.rasmooplus.domain.model.jpa.SubscriptionType;
 import com.client.ws.rasmooplus.domain.service.SubscriptionTypeService;
 import com.client.ws.rasmooplus.dto.SubscriptionTypeDto;
 
@@ -41,9 +41,9 @@ public class SubscriptionTypeController {
 
     @PostMapping
     public ResponseEntity<SubscriptionType> create(@Valid @RequestBody SubscriptionTypeDto dto) {
-        
+
         SubscriptionType subscriptionType = subscriptionTypeService.create(dto);
-        
+
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")

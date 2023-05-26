@@ -9,5 +9,4 @@ class RasmooplusApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

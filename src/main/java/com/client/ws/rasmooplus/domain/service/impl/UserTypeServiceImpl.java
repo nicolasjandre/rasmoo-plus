@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.client.ws.rasmooplus.domain.model.UserType;
-import com.client.ws.rasmooplus.domain.repository.UserTypeRepository;
+import com.client.ws.rasmooplus.domain.model.jpa.UserType;
+import com.client.ws.rasmooplus.domain.repository.jpa.UserTypeRepository;
 import com.client.ws.rasmooplus.domain.service.UserTypeService;
 
 @Service

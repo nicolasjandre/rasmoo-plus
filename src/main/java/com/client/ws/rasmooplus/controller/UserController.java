@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.client.ws.rasmooplus.domain.model.User;
+import com.client.ws.rasmooplus.domain.model.jpa.User;
 import com.client.ws.rasmooplus.domain.service.UserService;
 import com.client.ws.rasmooplus.dto.UserDto;
 
