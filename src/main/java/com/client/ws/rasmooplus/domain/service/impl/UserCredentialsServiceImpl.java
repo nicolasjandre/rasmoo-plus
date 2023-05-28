@@ -18,6 +18,7 @@ import com.client.ws.rasmooplus.domain.model.jpa.UserCredentials;
 import com.client.ws.rasmooplus.domain.model.redis.UserRecoveryCode;
 import com.client.ws.rasmooplus.domain.repository.jpa.UserCredentialsRepository;
 import com.client.ws.rasmooplus.domain.repository.redis.UserRecoveryCodeRepository;
+import com.client.ws.rasmooplus.dto.EmailDto;
 import com.client.ws.rasmooplus.dto.UserCredentialsDto;
 import com.client.ws.rasmooplus.integration.MailIntegration;
 
@@ -81,7 +82,9 @@ public class UserCredentialsServiceImpl implements UserDetailsService {
 
         userRecoveryCodeRepository.save(userRecoveryCode);
 
-        mailIntegration.send(email, "Código de recuperação", "Código de recuperação: " + code);
+        EmailDto emailDto = new EmailDto(email, "Código de recuperação", "Código de recuperação: " + code);
+
+        mailIntegration.send(emailDto);
     }
 
     public boolean isRecoveryCodeValid(String recoveryCode, String email) {
@@ -133,7 +136,9 @@ public class UserCredentialsServiceImpl implements UserDetailsService {
                             """,
                     dto.getEmail());
 
-            mailIntegration.send(dto.getEmail(), "Alteração de senha", message);
+            EmailDto emailDto = new EmailDto(dto.getEmail(), "Alteração de senha", message);
+
+            mailIntegration.send(emailDto);
         }
     }
 }

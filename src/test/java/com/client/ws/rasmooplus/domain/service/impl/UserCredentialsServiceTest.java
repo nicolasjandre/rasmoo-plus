@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -31,6 +30,7 @@ import com.client.ws.rasmooplus.domain.model.jpa.UserCredentials;
 import com.client.ws.rasmooplus.domain.model.redis.UserRecoveryCode;
 import com.client.ws.rasmooplus.domain.repository.jpa.UserCredentialsRepository;
 import com.client.ws.rasmooplus.domain.repository.redis.UserRecoveryCodeRepository;
+import com.client.ws.rasmooplus.dto.EmailDto;
 import com.client.ws.rasmooplus.dto.UserCredentialsDto;
 import com.client.ws.rasmooplus.integration.MailIntegration;
 
@@ -53,10 +53,6 @@ public class UserCredentialsServiceTest {
     private MailIntegration mailIntegration;
 
     private final String email = "teste@teste.com";
-
-    private final String subjectCodeRecover = "Código de recuperação";
-
-    private final String subjectPasswordSent = "Alteração de senha";
 
     private final Long recoveryCodeTimeout = 5L;
 
@@ -99,7 +95,7 @@ public class UserCredentialsServiceTest {
         verify(userRecoveryCodeRepository, times(1)).findByEmail(email);
         verify(userCredentialsRepository, times(1)).findByUsername(email);
         verify(userRecoveryCodeRepository, times(0)).save(any());
-        verify(mailIntegration, times(0)).send(anyString(), anyString(), anyString());
+        verify(mailIntegration, times(0)).send(any(EmailDto.class));
     }
 
     @Test
@@ -130,7 +126,7 @@ public class UserCredentialsServiceTest {
         verify(userRecoveryCodeRepository, times(1)).findByEmail(email);
         verify(userCredentialsRepository, times(1)).findByUsername(email);
         verify(userRecoveryCodeRepository, times(1)).save(userRecoveryCode);
-        verify(mailIntegration, times(1)).send(eq(email), eq(subjectCodeRecover), anyString());
+        verify(mailIntegration, times(1)).send(any(EmailDto.class));
     }
 
     @Test
@@ -157,7 +153,7 @@ public class UserCredentialsServiceTest {
         verify(userRecoveryCodeRepository, times(1)).findByEmail(email);
         verify(userCredentialsRepository, times(0)).findByUsername(any());
         verify(userRecoveryCodeRepository, times(1)).save(userRecoveryCode);
-        verify(mailIntegration, times(1)).send(eq(email), eq(subjectCodeRecover), anyString());
+        verify(mailIntegration, times(1)).send(any(EmailDto.class));
     }
 
     @Test
@@ -253,7 +249,7 @@ public class UserCredentialsServiceTest {
         verify(userCredentialsRepository, times(0)).findByUsername(anyString());
         verify(userCredentialsRepository, times(0)).save(any());
         verify(userRecoveryCodeRepository, times(0)).save(any());
-        verify(mailIntegration, times(0)).send(eq(email), eq(subjectCodeRecover), anyString());
+        verify(mailIntegration, times(0)).send(any(EmailDto.class));
     }
 
     @Test
@@ -273,7 +269,7 @@ public class UserCredentialsServiceTest {
         verify(userCredentialsRepository, times(0)).findByUsername(anyString());
         verify(userCredentialsRepository, times(0)).save(any());
         verify(userRecoveryCodeRepository, times(0)).save(any());
-        verify(mailIntegration, times(0)).send(anyString(), anyString(), anyString());
+        verify(mailIntegration, times(0)).send(any(EmailDto.class));
     }
 
     @Test
@@ -297,6 +293,6 @@ public class UserCredentialsServiceTest {
         verify(userCredentialsRepository, times(1)).findByUsername(email);
         verify(userCredentialsRepository, times(1)).save(userCredentials);
         verify(userRecoveryCodeRepository, times(1)).save(userRecoveryCode);
-        verify(mailIntegration, times(1)).send(eq(email), eq(subjectPasswordSent), anyString());
+        verify(mailIntegration, times(1)).send(any(EmailDto.class));
     }
 }

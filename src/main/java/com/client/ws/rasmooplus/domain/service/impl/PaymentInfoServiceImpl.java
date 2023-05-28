@@ -25,6 +25,7 @@ import com.client.ws.rasmooplus.domain.repository.jpa.UserPaymentInfoRepository;
 import com.client.ws.rasmooplus.domain.repository.jpa.UserRepository;
 import com.client.ws.rasmooplus.domain.repository.jpa.UserTypeRepository;
 import com.client.ws.rasmooplus.domain.service.PaymentInfoService;
+import com.client.ws.rasmooplus.dto.EmailDto;
 import com.client.ws.rasmooplus.dto.PaymentProcessDto;
 import com.client.ws.rasmooplus.dto.wsraspay.CustomerDto;
 import com.client.ws.rasmooplus.dto.wsraspay.OrderDto;
@@ -116,7 +117,9 @@ public class PaymentInfoServiceImpl implements PaymentInfoService {
                     Senha: %s
                     """, user.getEmail(), defaultPassword);
 
-            mailIntegration.send(user.getEmail(), "Acesso liberado!", message);
+            EmailDto emailDto = new EmailDto(user.getEmail(), "Acesso liberado!", message);
+
+            mailIntegration.send(emailDto);
 
             userService.updateUserSubscriptionType(user, dto.getProductKey());
         }

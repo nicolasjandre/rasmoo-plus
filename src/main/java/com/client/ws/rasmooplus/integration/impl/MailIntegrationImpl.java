@@ -5,7 +5,10 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
+import com.client.ws.rasmooplus.dto.EmailDto;
 import com.client.ws.rasmooplus.integration.MailIntegration;
+
+import jakarta.validation.Valid;
 
 @Component
 public class MailIntegrationImpl implements MailIntegration {
@@ -14,11 +17,12 @@ public class MailIntegrationImpl implements MailIntegration {
     private JavaMailSender javaMailSender;
 
     @Override
-    public void send(String mailTo, String subject, String message) {
+    public void send(@Valid EmailDto emailDto) {
+
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setTo(mailTo);
-        simpleMailMessage.setSubject(subject);
-        simpleMailMessage.setText(message);
+        simpleMailMessage.setTo(emailDto.getMailTo());
+        simpleMailMessage.setSubject(emailDto.getSubject());
+        simpleMailMessage.setText(emailDto.getMessage());
         javaMailSender.send(simpleMailMessage);
     }
 }

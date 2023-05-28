@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -40,6 +39,7 @@ import com.client.ws.rasmooplus.domain.repository.jpa.UserCredentialsRepository;
 import com.client.ws.rasmooplus.domain.repository.jpa.UserPaymentInfoRepository;
 import com.client.ws.rasmooplus.domain.repository.jpa.UserRepository;
 import com.client.ws.rasmooplus.domain.repository.jpa.UserTypeRepository;
+import com.client.ws.rasmooplus.dto.EmailDto;
 import com.client.ws.rasmooplus.dto.PaymentProcessDto;
 import com.client.ws.rasmooplus.dto.UserPaymentInfoDto;
 import com.client.ws.rasmooplus.dto.wsraspay.CustomerDto;
@@ -133,7 +133,7 @@ public class PaymentInfoServiceTest {
         verify(userPaymentInfoRepository, times(0)).save(any());
         verify(userTypeRepository, times(0)).findById(any());
         verify(userCredentialsRepository, times(0)).save(any());
-        verify(mailIntegration, times(0)).send(anyString(), anyString(), anyString());
+        verify(mailIntegration, times(0)).send(any(EmailDto.class));
         verify(userService, times(0)).updateUserSubscriptionType(any(), any());
     }
 
@@ -155,7 +155,7 @@ public class PaymentInfoServiceTest {
         verify(userPaymentInfoRepository, times(0)).save(any());
         verify(userTypeRepository, times(0)).findById(any());
         verify(userCredentialsRepository, times(0)).save(any());
-        verify(mailIntegration, times(0)).send(anyString(), anyString(), anyString());
+        verify(mailIntegration, times(0)).send(any(EmailDto.class));
         verify(userService, times(0)).updateUserSubscriptionType(any(), any());
     }
 
@@ -167,7 +167,7 @@ public class PaymentInfoServiceTest {
         OrderDto orderDto = OrderMapper.build(customerDto.getId(), paymentProcessDto);
 
         PaymentDto paymentDto = PaymentMapper.build(customerDto.getId(), orderDto.getId(),
-        CreditCardMapper.build(paymentProcessDto.getUserPaymentInfoDto(), user.getCpf()));
+                CreditCardMapper.build(paymentProcessDto.getUserPaymentInfoDto(), user.getCpf()));
 
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
         when(wsRaspayIntegration.createCustomer(customerDto)).thenReturn(customerDto);
@@ -182,9 +182,9 @@ public class PaymentInfoServiceTest {
         verify(userPaymentInfoRepository, times(0)).save(any());
         verify(userTypeRepository, times(0)).findById(any());
         verify(userCredentialsRepository, times(0)).save(any());
-        verify(mailIntegration, times(0)).send(anyString(), anyString(), anyString());
+        verify(mailIntegration, times(0)).send(any(EmailDto.class));
         verify(userService, times(0)).updateUserSubscriptionType(any(), any());
-        
+
     }
 
     @Test
@@ -195,9 +195,10 @@ public class PaymentInfoServiceTest {
         OrderDto orderDto = OrderMapper.build(customerDto.getId(), paymentProcessDto);
 
         PaymentDto paymentDto = PaymentMapper.build(customerDto.getId(), orderDto.getId(),
-        CreditCardMapper.build(paymentProcessDto.getUserPaymentInfoDto(), user.getCpf()));
+                CreditCardMapper.build(paymentProcessDto.getUserPaymentInfoDto(), user.getCpf()));
 
-        UserPaymentInfo userPaymentInfo = UserPaymentInfoMapper.fromDtoToEntity(paymentProcessDto.getUserPaymentInfoDto(), user);
+        UserPaymentInfo userPaymentInfo = UserPaymentInfoMapper
+                .fromDtoToEntity(paymentProcessDto.getUserPaymentInfoDto(), user);
 
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
         when(wsRaspayIntegration.createCustomer(customerDto)).thenReturn(customerDto);
@@ -206,9 +207,9 @@ public class PaymentInfoServiceTest {
         when(userTypeRepository.findById(UserTypeEnum.ALUNO.getId())).thenReturn(Optional.empty());
 
         assertEquals("UserType de nome " + UserTypeEnum.ALUNO + " não encontrado",
-                assertThrows(NotFoundException.class, 
-                () -> paymentInfoService.process(paymentProcessDto))
-                .getMessage());
+                assertThrows(NotFoundException.class,
+                        () -> paymentInfoService.process(paymentProcessDto))
+                        .getMessage());
 
         verify(userRepository, times(1)).findById(1L);
         verify(wsRaspayIntegration, times(1)).createCustomer(CustomerMapper.build(user));
@@ -216,7 +217,7 @@ public class PaymentInfoServiceTest {
         verify(userPaymentInfoRepository, times(1)).save(userPaymentInfo);
         verify(userTypeRepository, times(1)).findById(UserTypeEnum.ALUNO.getId());
         verify(userCredentialsRepository, times(0)).save(any());
-        verify(mailIntegration, times(0)).send(anyString(), anyString(), anyString());
+        verify(mailIntegration, times(0)).send(any(EmailDto.class));
         verify(userService, times(0)).updateUserSubscriptionType(any(), any());
     }
 
@@ -230,13 +231,14 @@ public class PaymentInfoServiceTest {
         OrderDto orderDto = OrderMapper.build(customerDto.getId(), paymentProcessDto);
 
         PaymentDto paymentDto = PaymentMapper.build(customerDto.getId(), orderDto.getId(),
-        CreditCardMapper.build(paymentProcessDto.getUserPaymentInfoDto(), user.getCpf()));
+                CreditCardMapper.build(paymentProcessDto.getUserPaymentInfoDto(), user.getCpf()));
 
-        UserPaymentInfo userPaymentInfo = UserPaymentInfoMapper.fromDtoToEntity(paymentProcessDto.getUserPaymentInfoDto(), user);
+        UserPaymentInfo userPaymentInfo = UserPaymentInfoMapper
+                .fromDtoToEntity(paymentProcessDto.getUserPaymentInfoDto(), user);
 
         UserCredentials userCredentials = new UserCredentials(null, user.getEmail(),
-                    passwordEncoder.encode("alunorasmoo"),
-                    new UserType());
+                passwordEncoder.encode("alunorasmoo"),
+                new UserType());
 
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
         when(wsRaspayIntegration.createCustomer(customerDto)).thenReturn(customerDto);
@@ -252,7 +254,7 @@ public class PaymentInfoServiceTest {
         verify(userPaymentInfoRepository, times(1)).save(userPaymentInfo);
         verify(userTypeRepository, times(1)).findById(UserTypeEnum.ALUNO.getId());
         verify(userCredentialsRepository, times(1)).save(userCredentials);
-        verify(mailIntegration, times(1)).send(anyString(), anyString(), anyString());
+        verify(mailIntegration, times(1)).send(any(EmailDto.class));
         verify(userService, times(1)).updateUserSubscriptionType(user, paymentProcessDto.getProductKey());
     }
 }
