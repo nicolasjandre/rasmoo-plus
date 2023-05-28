@@ -27,6 +27,7 @@ public class SubscriptionTypeServiceImpl implements SubscriptionTypeService {
     @Override
     @CacheEvict(value = "subscriptionType", allEntries = true)
     public SubscriptionType create(SubscriptionTypeDto dto) {
+        
         if (Objects.nonNull(dto.getId())) {
             throw new BadRequestException("Não pode haver um id no body");
         }
