@@ -42,13 +42,13 @@ public class UserCredentialsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        var userDetailsOpt = userCredentialsRepository.findByUsername(username);
+        Optional<UserCredentials> userCredentialsOpt = userCredentialsRepository.findByUsername(username);
 
-        if (userDetailsOpt.isEmpty()) {
+        if (userCredentialsOpt.isEmpty()) {
             throw new NotFoundException("Usuário ou senha inválidos");
         }
 
-        return userDetailsOpt.get();
+        return userCredentialsOpt.get();
     }
 
     public void sendRecoveryCode(String email) {
@@ -102,9 +102,9 @@ public class UserCredentialsServiceImpl implements UserDetailsService {
         return doRecoveryCodeMatch && !isRecoveryCodeExpired && !isAlreadyUsed;
     }
 
-    public void updatePasswordByRecoveryCode(UserCredentialsDto dto) {
+    public void updatePasswordByRecoveryCode(UserCredentialsDto dto, String recoveryCode) {
 
-        boolean isRecoveryCodeValid = this.isRecoveryCodeValid(dto.getRecoveryCode(), dto.getEmail());
+        boolean isRecoveryCodeValid = this.isRecoveryCodeValid(recoveryCode, dto.getEmail());
         boolean doPasswordAndConfirmationMatch = dto.getPassword().equals(dto.getPasswordConfirmation());
 
         if (!doPasswordAndConfirmationMatch) {

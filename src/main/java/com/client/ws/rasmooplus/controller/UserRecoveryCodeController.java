@@ -16,6 +16,7 @@ import com.client.ws.rasmooplus.dto.UserCredentialsDto;
 import com.client.ws.rasmooplus.dto.UserRecoveryCodeDto;
 
 import jakarta.validation.Valid;
+import jakarta.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/user-recovery-code")
@@ -38,8 +39,10 @@ public class UserRecoveryCodeController {
     }
 
     @PatchMapping("/password")
-    public ResponseEntity<Void> updatePasswordByRecoveryCode(@RequestBody @Valid UserCredentialsDto dto) {
-        userCredentialsServiceImpl.updatePasswordByRecoveryCode(dto);
+    public ResponseEntity<Void> updatePasswordByRecoveryCode(@RequestBody @Valid UserCredentialsDto dto,
+            @PathParam("recoveryCode") String recoveryCode) {
+
+        userCredentialsServiceImpl.updatePasswordByRecoveryCode(dto, recoveryCode);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
 }

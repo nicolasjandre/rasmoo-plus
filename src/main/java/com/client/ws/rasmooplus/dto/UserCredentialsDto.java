@@ -19,7 +19,4 @@ public class UserCredentialsDto {
 
     @NotBlank(message = "Campo 'passwordConfirmation' não pode estar vazio")
     private String passwordConfirmation;
-
-    @NotBlank(message = "Campo 'recoveryCode' não pode estar vazio")
-    private String recoveryCode;
 }

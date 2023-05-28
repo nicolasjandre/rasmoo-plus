@@ -2,6 +2,8 @@ package com.client.ws.rasmooplus.domain.model.jpa;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import com.client.ws.rasmooplus.config.JacocoConfig.Generated;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,6 +33,7 @@ public class UserType implements GrantedAuthority {
     private String description;
 
     @Override
+    @Generated
     public String getAuthority() {
         return name;
     }

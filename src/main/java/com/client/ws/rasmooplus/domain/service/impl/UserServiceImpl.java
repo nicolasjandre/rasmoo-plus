@@ -49,6 +49,17 @@ public class UserServiceImpl implements UserService {
     }
 
     public void updateUserSubscriptionType(User user, String productKey) {
+
+        if (Objects.isNull(user.getId())) {
+            throw new BadRequestException("O id do usuário não pode estar vazio");
+        }
+
+        Optional<User> userOpt = userRepository.findById(user.getId());
+
+        if (userOpt.isEmpty()) {
+            throw new NotFoundException("Usuário de id=[" + user.getId() + "] não encontrado");
+        }
+
         Optional<SubscriptionType> subscriptionTypeOpt = subscriptionTypeRepository.findByProductKey(productKey);
 
         if (subscriptionTypeOpt.isEmpty()) {

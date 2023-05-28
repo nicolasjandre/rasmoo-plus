@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.client.ws.rasmooplus.config.JacocoConfig.Generated;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -42,6 +44,7 @@ public class UserCredentials implements UserDetails {
     private UserType userType;
 
     @Override
+    @Generated
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<UserType> userTypes = new ArrayList<>();
         userTypes.add(userType);
@@ -49,26 +52,31 @@ public class UserCredentials implements UserDetails {
     }
 
     @Override
+    @Generated
     public String getUsername() {
         return username;
     }
 
     @Override
+    @Generated
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
+    @Generated
     public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
+    @Generated
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
     @Override
+    @Generated
     public boolean isEnabled() {
         return true;
     }
