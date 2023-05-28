@@ -100,7 +100,7 @@ public class PaymentInfoServiceImpl implements PaymentInfoService {
             Optional<UserType> userTypeOpt = userTypeRepository.findById(UserTypeEnum.ALUNO.getId());
 
             if (userTypeOpt.isEmpty()) {
-                throw new NotFoundException("UserType de nome " + UserTypeEnum.ALUNO + " não encontrado.");
+                throw new NotFoundException("UserType de nome " + UserTypeEnum.ALUNO + " não encontrado");
             }
 
             UserCredentials userCredentials = new UserCredentials(null, user.getEmail(),
